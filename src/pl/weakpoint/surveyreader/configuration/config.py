@@ -1,0 +1,4 @@
+class Config:
+
+    name = ""
+    password = ""
