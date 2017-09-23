@@ -1,10 +1,16 @@
 from pl.weakpoint.surveyreader.communication.siteConnector import SiteConnector
+from pl.weakpoint.surveyreader.reader.parser.surveyListParser import SurveyListParser
 from pl.weakpoint.surveyreader.reader.surveyResultListReader import SurveyResultListReader
 
-connector = SiteConnector()
-connector.connect()
-page = connector.read_surveys_page()
-print(page)
-list_of_links = SurveyResultListReader().read(page)
-print(list_of_links)
-connector.disconnect()
+connector = None
+try:
+    connector = SiteConnector()
+    connector.connect()
+    page = connector.read_surveys_list_main_page()
+    list_of_links = SurveyListParser().parse_surveys_list(page)
+    for link in list_of_links:
+        survey_page = connector.get_survey_page(link.href)
+        #print(survey_page)
+finally:
+    if connector is not None:
+        connector.disconnect()

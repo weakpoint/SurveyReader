@@ -22,8 +22,11 @@ class SiteConnector:
     def disconnect(self):
         self._session.close()
 
-    def read_surveys_page(self):
-        request = self._session.get('http://www.ankieter.pl/wyniki/pojedyncze/id/17660/')
+    def read_surveys_list_main_page(self):
+        return self.get_survey_page('/wyniki/pojedyncze/id/17660/')
+
+    def get_survey_page(self, url):
+        request = self._session.get('http://www.ankieter.pl' + url)
         return request.text
 
 

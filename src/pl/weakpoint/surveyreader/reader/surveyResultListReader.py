@@ -1,4 +1,7 @@
 from pl.weakpoint.surveyreader.builder.surveyListBuilder import SurveyListBuilder
+import re
+
+from pl.weakpoint.surveyreader.reader.parser.surveyListParser import SurveyListParser
 
 
 class SurveyResultListReader:
@@ -21,6 +24,13 @@ class SurveyResultListReader:
         idx_print = html.find("/wyniki/pobierzAnkiety")
 
         if idx_print > -1:
+            print(html)
+            parser = SurveyListParser()
+            parser.feed(html)
+
+            # p.mach(s).groups()
+            # p.search(s).groups()
+            # p.findall(s)
             idx_ol_start = html.find("<ol>", idx_print)
             idx_ol_stop = html.find("</ol>", idx_ol_start)
 
