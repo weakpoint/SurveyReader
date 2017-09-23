@@ -44,6 +44,7 @@ class SurveyParser(HTMLParser):
                 self.li_tag_question_found = False
                 if self.ol_tag_found:
                     self.result.append(self.answer)
+                    self.answer = ""
             return
         if tag == 'ul':
             self.ul_tag_found = False
