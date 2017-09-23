@@ -22,7 +22,6 @@ class SurveyListParser(HTMLParser):
         self.link = ""
 
     def handle_starttag(self, tag, attrs):
-        print("Encountered a start tag:", tag)
         if tag == "ol":
             self.ol_tag_found = True
 
@@ -46,7 +45,6 @@ class SurveyListParser(HTMLParser):
             return
 
     def handle_endtag(self, tag):
-        print("Encountered an end tag :", tag)
         if tag == "ol":
             self.ol_tag_found = False
             return
