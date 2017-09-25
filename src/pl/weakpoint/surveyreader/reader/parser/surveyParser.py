@@ -42,7 +42,7 @@ class SurveyParser(HTMLParser):
                 self.li_tag_answer_found = False
             else:
                 self.li_tag_question_found = False
-                if self.ol_tag_found:
+                if self.ol_tag_found and not self.ul_tag_found:
                     self.result.append(self.answer)
                     self.answer = ""
             return
@@ -50,8 +50,8 @@ class SurveyParser(HTMLParser):
             self.ul_tag_found = False
 
     def handle_data(self, data):
-        if self.li_tag_answer_found and self.ol_tag_found:
-            self.answer = data.replace('&nbsp;', '').strip()
+        if self.li_tag_answer_found and self.ul_tag_found and self.ol_tag_found:
+            self.answer += data.replace('&nbsp;', ',').strip()
 
     def parse_survey(self, html):
         self.feed(html)

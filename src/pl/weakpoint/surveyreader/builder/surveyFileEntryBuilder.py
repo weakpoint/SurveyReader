@@ -1,6 +1,6 @@
 class SurveyFileEntryBuilder:
 
-    CHOOSEN = "wybrano"
+    CHOSEN = "wybrano"
     result = []
     answers = None
 
@@ -36,6 +36,6 @@ class SurveyFileEntryBuilder:
 
     def add_chosen_value_when_contains(self, value, answer):
         if answer is not None and value in answer:
-            return self.CHOOSEN
+            return self.CHOSEN
         else:
             return ''
